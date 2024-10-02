@@ -89,5 +89,27 @@ Relay option for openwrt
 
 电脑连接后，IP地址是从路由分配的，主路由网络无法访问从路由网络。
 
+添加IPv6支持
 
-Ref: https://blog.csdn.net/qq_26202991/article/details/133127238
+Activate IPv6 support on your Internet box, this will get you a public IPv6 prefix. We will now activate IPv6 on our Wi-Fi extender to allow for Stateless Address Autoconfiguration (SLAAC) of your public IPv6 addresses and IPv6 traffic.
+
+1. Go to Network / Interfaces and create a new interface. Name it WWAN6, using protocol DHCPv6, cover the WWAN interface. In the Common Configuration of the new interface, configure: Request IPv6 address: disabled. In the Firewall settings: check that the “lan / repeater bridge…” line is selected. Leave the other settings by default, especially, leave the “Custom delegated IPv6-prefix” field empty. On the Interfaces / overwiew page check that the WWAN interface gets a public IPv6 address.
+
+2. Edit the LAN interface settings, DHCP server / IPv6 settings: check/modify the following settings: Router Advertisement Service: relay mode, DHCPv6 service: disabled, NDP-Proxy: relay mode.
+
+3. Open a SSH session on your OpenWrt device. Issue the following commands:
+
+uci set dhcp.wan.interface=wwan
+uci set dhcp.wan.ra=relay
+uci set dhcp.wan.ndp=relay
+uci set dhcp.wan.master=1
+uci commit
+
+We suppose that you created a wwan interface when you joined to the other Wi-Fi network as suggested earlier in this guide; otherwise, change the dhcp.wan.interface=… line accordingly.
+
+That's it. Restart ophcpd (LuCI System/Starup page, or /etc/init.d/odhcpd restart) and your IPv6-network should begin to configure itself. Connected IPv6-enabled devices should get their public IPv6 addresses, derived from your public IPv6 prefix, and IPv6 traffic should go through your Wi-Fi extender.
+
+
+Ref: 
+https://blog.csdn.net/qq_26202991/article/details/133127238
+https://openwrt.org/zh/docs/guide-user/network/wifi/relay_configuration
