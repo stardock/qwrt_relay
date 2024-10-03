@@ -98,13 +98,13 @@ Activate IPv6 support on your Internet box, this will get you a public IPv6 pref
 2. Edit the LAN interface settings, DHCP server / IPv6 settings: check/modify the following settings: Router Advertisement Service: relay mode, DHCPv6 service: disabled, NDP-Proxy: relay mode.
 
 3. Open a SSH session on your OpenWrt device. Issue the following commands:
-
+```
 uci set dhcp.wan.interface=wwan
 uci set dhcp.wan.ra=relay
 uci set dhcp.wan.ndp=relay
 uci set dhcp.wan.master=1
 uci commit
-
+```
 We suppose that you created a wwan interface when you joined to the other Wi-Fi network as suggested earlier in this guide; otherwise, change the dhcp.wan.interface=… line accordingly.
 
 That's it. Restart ophcpd (LuCI System/Starup page, or /etc/init.d/odhcpd restart) and your IPv6-network should begin to configure itself. Connected IPv6-enabled devices should get their public IPv6 addresses, derived from your public IPv6 prefix, and IPv6 traffic should go through your Wi-Fi extender.
