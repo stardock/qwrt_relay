@@ -4,7 +4,8 @@ Relay option for openwrt
 
 一、无线桥接（WDS）
 
-先放一张拓扑图：
+先放一张拓扑图：  
+![image](https://github.com/stardock/qwrt_relay/blob/main/wds-relay.png)
 
 主要是参考官方的文章：[OpenWrt Wiki] 使用Atheros和MAC80211 WDS实现无线网桥（无线中继）
 
@@ -25,7 +26,8 @@ Relay option for openwrt
 
 二、无线桥接（relayd）
 
-先放拓扑图：
+先放拓扑图：  
+![image](https://github.com/stardock/qwrt_relay/blob/main/bridge-relay.png)
 
 参考官方的文章：[OpenWrt Wiki] Wi-Fi extender / repeater / bridge configuration
 
